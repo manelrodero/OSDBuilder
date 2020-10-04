@@ -1,0 +1,2 @@
+OSDBuilder -SetHome $PSScriptRoot
+Pause
