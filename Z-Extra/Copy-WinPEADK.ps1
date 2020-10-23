@@ -4,7 +4,7 @@
 [CmdletBinding(DefaultParameterSetName = "SO")]
 Param (
     [Parameter(Mandatory)]
-    [ValidateSet('1903', '1909', '2004')]
+    [ValidateSet('1903', '1909', '2004', '2009')]
     [string]$OSVersion
 )
 
@@ -23,6 +23,11 @@ $WinPEOCs = @{
         Architecture = 'x64'
     }
     '2004' = @{
+        ISO          = 'E:\EQUIPS\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_32_64_ARM64_MultiLang_LangPackAll_LIP_X22-21307.iso'
+        Languages    = @('es-es', 'en-us')
+        Architecture = 'x64'
+    }
+    '2009' = @{
         ISO          = 'E:\EQUIPS\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_32_64_ARM64_MultiLang_LangPackAll_LIP_X22-21307.iso'
         Languages    = @('es-es', 'en-us')
         Architecture = 'x64'

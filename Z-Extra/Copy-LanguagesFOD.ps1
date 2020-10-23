@@ -4,7 +4,7 @@
 [CmdletBinding(DefaultParameterSetName = "SO")]
 Param (
     [Parameter(Mandatory)]
-    [ValidateSet('1903', '1909', '2004')]
+    [ValidateSet('1903', '1909', '2004', '2009')]
     [string]$OSVersion
 )
 
@@ -23,6 +23,11 @@ $LPs = @{
         BaseLanguage = 'es-es'	
     }
     '2004' = @{
+        ISO          = 'E:\EQUIPS\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_64Bit_MultiLang_FOD_1_X22-21311.iso'
+        Languages    = @('es-es', 'en-us', 'fr-fr', 'ca-es')
+        BaseLanguage = 'es-es'
+    }
+    '2009' = @{
         ISO          = 'E:\EQUIPS\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_64Bit_MultiLang_FOD_1_X22-21311.iso'
         Languages    = @('es-es', 'en-us', 'fr-fr', 'ca-es')
         BaseLanguage = 'es-es'

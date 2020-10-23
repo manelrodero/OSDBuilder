@@ -4,7 +4,7 @@
 [CmdletBinding(DefaultParameterSetName = "SO")]
 Param (
     [Parameter(Mandatory)]
-    [ValidateSet('1903', '1909', '2004')]
+    [ValidateSet('1903', '1909', '2004', '2009')]
     [string]$OSVersion
 )
 
@@ -30,6 +30,13 @@ $LPs = @{
         LanguagesLXP = @('ca-es', 'es-es', 'en-us', 'fr-fr')
         BaseLanguage = 'es-es'
     }
+    '2009' = @{
+        ISO          = 'E:\EQUIPS\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_32_64_ARM64_MultiLang_LangPackAll_LIP_X22-21307.iso'
+        ISOExtraLXP  = 'E:\EQUIPS\ISOs\Win10\20H2\SW_DVD9_NTRL_Win_10_2004_32_64_ARM64_MultiLng_LngPkAll_LIP_9B_LXP_ONLY_X22-38606.iso'
+        Languages    = @('es-es', 'en-us', 'fr-fr')
+        LanguagesLXP = @('ca-es', 'es-es', 'en-us', 'fr-fr')
+        BaseLanguage = 'es-es'
+    }
 }
 
 # Do not modify below this line
@@ -37,6 +44,9 @@ $LPs = @{
 
 # ISO file of OS Version
 $ISO = $LPs[$OSVersion].ISO
+if ($LPs[$OSVersion].ISOExtraLXP) {
+    $ISOExtraLXP = $LPs[$OSVersion].ISOExtraLXP
+}
 
 # Language Packs we want to copy (i.e. languages we support)
 $Languages = $LPs[$OSVersion].Languages
@@ -54,11 +64,25 @@ If (!$ISODrive) {
     $ISODrive = ($mountResult | Get-Volume).DriveLetter
 }
 
+# Test if there is an ISO with Extra LP
+if ($ISOExtraLXP) {
+    $ISOExtraDrive = (Get-DiskImage -ImagePath $ISOExtraLXP | Get-Volume).DriveLetter
+    If (!$ISOExtraDrive) {
+        $mountResult = Mount-DiskImage -ImagePath $ISOExtraLXP -PassThru
+        $ISOExtraDrive = ($mountResult | Get-Volume).DriveLetter
+    }
+}
+
 $Source = $ISODrive + ":\x64\langpacks"
 $SourceLXP = $ISODrive + ":\LocalExperiencePack"
 Write-Output "ISO File is $ISO"
 Write-Output "LP is $Source"
 Write-Output "LXP is $SourceLXP"
+
+if ($ISOExtraDrive) {
+    $SourceExtraLXP = $ISOExtraDrive + ":\LocalExperiencePack"
+    Write-Output "LXP Extra is $SourceExtraLXP"
+}
 
 # Initialize OSDBuilder Variables
 Initialize-OSDBuilder
@@ -98,8 +122,21 @@ foreach ($LanguageLXP in $LanguagesLXP) {
             Copy-Item $item.FullName "$Destination" -ea SilentlyContinue
         }
     }
+    if ($SourceExtraLXP) {
+        if (Test-Path $SourceExtraLXP\$LanguageLXP) {
+    
+            $LanguageFeatures = Get-ChildItem $SourceExtraLXP\$LanguageLXP
+    
+            # If you want to exclude your Base Language, swap the following lines
+            # foreach ($item in $LanguageFeatures | ? {$_.Name -notmatch $BaseLanguage}) {
+            foreach ($item in $LanguageFeatures) {
+                Write-Output "- (Extra) $item"
+                Copy-Item $item.FullName "$Destination" -ea SilentlyContinue
+            }
+        }
+    }
 }
 
 Dismount-DiskImage -ImagePath $ISO | Out-Null
-
+if ($ISOExtraLXP) { Dismount-DiskImage -ImagePath $ISOExtraLXP | Out-Null }
 Pop-Location
