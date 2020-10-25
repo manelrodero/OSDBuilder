@@ -1,25 +1,25 @@
 {
     "TaskType":  "OSBuild",
     "TaskVersion":  "20.9.29.1",
-    "TaskGuid":  "f14b66f9-ec10-4ea0-94c7-67a9ebfc40d6",
+    "TaskGuid":  "af69fb2c-fd35-4bfa-9f4f-fc16be19771b",
     "TaskName":  "Windows 10 Education x64 1909 Scripts",
     "CustomName":  "",
     "OSMFamily":  "Client Education x64 18363 es-ES",
-    "OSMGuid":  "5508ba52-1949-4e21-a568-bd0452920197",
-    "Name":  "Windows 10 Education x64 1909 18363.1082 es-ES",
+    "OSMGuid":  "43b9acf2-d47d-4367-aee6-84804dfd9752",
+    "Name":  "Windows 10 Education x64 1909 18363.1139 es-ES",
     "ImageName":  "Windows 10 Education",
     "Arch":  "x64",
     "ReleaseId":  "1909",
-    "UBR":  "18363.1082",
+    "UBR":  "18363.1139",
     "Languages":  [
                       "es-ES"
                   ],
     "EditionId":  "Education",
     "InstallationType":  "Client",
     "MajorVersion":  "10",
-    "Build":  "18362",
+    "Build":  "18363",
     "CreatedTime":  "\/Date(1570418099992)\/",
-    "ModifiedTime":  "\/Date(1600955724409)\/",
+    "ModifiedTime":  "\/Date(1602623341808)\/",
     "ContentPacks":  null,
     "EnableNetFX3":  "False",
     "WinPEAutoExtraFiles":  "False",
@@ -29,7 +29,9 @@
     "DisableWindowsOptionalFeature":  null,
     "EnableWindowsOptionalFeature":  null,
     "Drivers":  null,
-    "ExtraFiles":  null,
+    "ExtraFiles":  [
+                       "ExtraFiles\\Windows 10 Scripts"
+                   ],
     "Scripts":  [
                     "Scripts\\Global Add-DesktopIcons.ps1",
                     "Scripts\\Global Set-ConsoleOptions.ps1",
@@ -41,7 +43,9 @@
                     "Scripts\\Windows 10 Disable-CortanaSearch.ps1",
                     "Scripts\\Windows 10 Disable-DriversFromWindowsUpdate.ps1",
                     "Scripts\\Windows 10 Disable-EdgeShortcut.ps1",
-                    "Scripts\\Windows 10 Disable-WebSearch.ps1"
+                    "Scripts\\Windows 10 Disable-PrivacySettingsExperience.ps1",
+                    "Scripts\\Windows 10 Disable-WebSearch.ps1",
+                    "Scripts\\Windows 10 Force-WinUserLanguageList.ps1"
                 ],
     "StartLayoutXML":  "",
     "UnattendXML":  "",

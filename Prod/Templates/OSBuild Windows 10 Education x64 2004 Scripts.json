@@ -29,7 +29,9 @@
     "DisableWindowsOptionalFeature":  null,
     "EnableWindowsOptionalFeature":  null,
     "Drivers":  null,
-    "ExtraFiles":  null,
+    "ExtraFiles":  [
+                       "ExtraFiles\\Windows 10 Scripts"
+                   ],
     "Scripts":  [
                     "Scripts\\Global Add-DesktopIcons.ps1",
                     "Scripts\\Global Set-ConsoleOptions.ps1",
@@ -41,7 +43,9 @@
                     "Scripts\\Windows 10 Disable-CortanaSearch.ps1",
                     "Scripts\\Windows 10 Disable-DriversFromWindowsUpdate.ps1",
                     "Scripts\\Windows 10 Disable-EdgeShortcut.ps1",
-                    "Scripts\\Windows 10 Disable-WebSearch.ps1"
+                    "Scripts\\Windows 10 Disable-PrivacySettingsExperience.ps1",
+                    "Scripts\\Windows 10 Disable-WebSearch.ps1",
+                    "Scripts\\Windows 10 Force-WinUserLanguageList.ps1"
                 ],
     "StartLayoutXML":  "",
     "UnattendXML":  "",
