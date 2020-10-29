@@ -652,7 +652,11 @@ En nuestro entorno se suelen deshabilitar las siguientes características:
 Y habilitar éstas:
 
 * Containers-DisposableClientVM (Windows Sandbox)
+* Microsoft-Windows-Subsystem-Linux (WSL 1)
 * TelnetClient
+* VirtualMachinePlatform (WSL 2)
+
+> **Nota**: La [característica **VirtualMachinePlatform**](https://docs.microsoft.com/en-us/windows/wsl/install-win10) es necesaria para poder instalar el [kernel de Linux WSL2](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi).
 
 ### Ejecución de scripts
 
