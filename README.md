@@ -689,24 +689,81 @@ Windows 10 Disable-WebSearch.ps1
 
 ```PowerShell
 # (Opcional) Crear un Template para añadir los lenguajes
-New-OSBuildTask -SaveAs Template -TaskName "Windows 10 Education x64 1909 Languages" -ContentLanguagePackages -SetAllIntl es-ES
+# New-OSBuildTask -SaveAs Template -TaskName "Windows 10 Education x64 1909 Languages" -ContentLanguagePackages -SetAllIntl es-ES
 
 # Crear un Template para añadir los lenguajes usando un ContentPack
 New-OSBuildTask -SaveAs Template -TaskName "Windows 10 Education x64 1909 Languages" -AddContentPacks -SetAllIntl es-ES
 ```
 
-En este entorno se seleccionan:
+Los lenguajes que se pueden seleccionar mediante el comando anterior son **ContentPack** que estén en el directorio `V:\OSDBuilder\Share\ContentPacks`.
+
+En nuestro entorno se suelen incluir los siguientes paquetes:
 
 * MultiLang ca-es
 * MultiLang en-us
 
+> **Nota**: Antes de poder seleccionar los lenguajes, es necesario crear los **ContentPack** tal como se explica más adelante (ver apartados **OSLanguagePacks** y **OSLanguageFeatures**).
+
+### (Opcional) Test de una OSBuild
+
+Para comprobar una **OSBuild** de forma rápida se puede ejecutar el siguiente comando:
+
+```PowerShell
+# Generar ISO de la OSBuild para probarla en una VM
+New-OSBuild -SkipTask -Execute -SkipComponentCleanup -SkipUpdates -CreateISO
+```
+
 ### Construir la OSBuild
+
+Finalmente, se puede generar la **OSBuild** a partir de la tarea inicial que usará las plantillas creadas en los pasos anteriores:
 
 ```PowerShell
 # Ejecutar la construcción de la OSBuild
 New-OSBuild -ByTaskName "Windows 10 Education x64 1909 BLANK" -Execute -Download
 ```
 
+### Ejemplo de OSBuildTask
+
+Un ejemplo con los pasos completos para la versión **2004** de Windows 10 (quitar AppX, habilitar/deshabilitar Features, añadir ContentPAcks y descargar OneDrive) sería el siguiente:
+
+```PowerShell
+# Crear una Task vacía seleccionando el ISO correspondiente
+New-OSBuildTask -SaveAs Task -TaskName "Windows 10 Education x64 2004 BLANK" -CustomName "Windows 10 Education x64 2004"
+
+# Crear un Template para eliminar las AppX que se considere
+# 1) Seleccionar todas las aplicaciones de la lista
+# 2) Editar el fichero JSON
+# 3) Borrar las que se conservan según la tabla del Anexo
+New-OSBuildTask -SaveAs Template -TaskName 'Windows 10 Education x64 2004 Appx' -RemoveAppx
+
+# Crear un Template para habilitar/deshabilitar las Features que se consideren
+# - MicrosoftWindowsPowerShellV2
+# - MicrosoftWindowsPowerShellV2Root
+# - Printing-XPSServices-Features
+# + Containers-DisposableClientVM (Windows Sandbox)
+# + Microsoft-Windows-Subsystem-Linux (WSL1)
+# + TelnetClient
+# + VirtualMachinePlatform (WSL2)
+New-OSBuildTask -SaveAs Template -TaskName "Windows 10 Education x64 2004 Features" -EnableFeature -DisableFeature
+
+# (Opcional) Crear un Template para añadir scripts
+New-OSBuildTask -SaveAs Template -TaskName "Windows 10 Education x64 2004 Scripts" -ContentScripts
+
+# Crear un Template para añadir los lenguajes usando ContentPacks que se hayan creado con anterioridad
+New-OSBuildTask -SaveAs Template -TaskName "Windows 10 Education x64 2004 Languages" -AddContentPacks -SetAllIntl es-ES
+
+# Descargar OneDrive
+Get-DownOSDBuilder -ContentDownload 'OneDriveSetup Production'
+
+# Se actualiza la OSMedia con los últimos parches
+Update-OSMedia
+
+# (Opcional) Test rápido de la OSBuild creando un ISO
+New-OSBuild -ByTaskName "Windows 10 Education x64 2004 BLANK" -Execute -SkipComponentCleanup -SkipUpdates -SkipUpdatesPE -CreateISO
+
+# Se ejecuta la construcción de la OSBuild
+New-OSBuild -ByTaskName "Windows 10 Education x64 2004 BLANK" -Execute -Download
+```
 
 ## Content Packs
 
@@ -884,12 +941,14 @@ WinPE-MDAC
 
 La documentación de Microsoft tiene la [referencia completa de los paquetes WinPE disponibles](https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-add-packages--optional-components-reference) para poder decidir cuáles se necesitan.
 
-> **Nota**: Aunque se pueden copiar a mano, el script `Copy-WinPEADK.ps1` permite copiar los ficheros desde el directorio de Windows ADK y el DVD de los LP.
+Aunque se pueden copiar a mano, el script `Copy-WinPEADK.ps1` permite copiar los ficheros desde el directorio de Windows ADK y el DVD de los LP:
 
 ```PowerShell
 .\Z-Extra\Copy-WinPEADK.ps1 1909
 .\Z-Extra\Copy-WinPEADK.ps1 2004
 ```
+
+> **Nota**: Los ficheros copiados desde `C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment` correponderán a la versión de [Windows ADK](https://docs.microsoft.com/en-us/windows-hardware/get-started/adk-install) instalada en el sistema, independientemente de la versión indicada como parámetro de los scripts anteriores.
 
 ### PEDaRT
 
@@ -935,55 +994,6 @@ New-OSDBuilderContentPack -Name "MultiLang en-us" -ContentType MultiLang
 .\Z-Extra\Copy-LanguagesFOD.ps1 2004
 ```
 
-## Test de una OSBuild
-
-Para comprobar una **OSBuild** de forma rápida se puede eejcutar el siguiente comando:
-
-```PowerShell
-New-OSBuild -SkipTask -Execute -SkipComponentCleanup -SkipUpdates -CreateISO
-```
-
-## Ejemplo de OSBuildTask
-
-Un ejemplo con los pasos completos para la versión **2004** de Windows 10 (quitar AppX, habilitar/deshabilitar Features, añadir ContentPAcks y descargar OneDrive) sería el siguiente:
-
-```PowerShell
-# Crear una Task vacía seleccionando el ISO correspondiente
-New-OSBuildTask -SaveAs Task -TaskName "Windows 10 Education x64 2004 BLANK" -CustomName "Windows 10 Education x64 2004"
-
-# Crear un Template para eliminar las AppX que se considere
-# 1) Seleccionar todas las aplicaciones de la lista
-# 2) Editar el fichero JSON
-# 3) Borrar las que se quedan según tabla del Anexo
-New-OSBuildTask -SaveAs Template -TaskName 'Windows 10 Education x64 2004 Appx' -RemoveAppx
-
-# Crear un Template para habilitar/deshabilitar las Features que se consideren
-# - MicrosoftWindowsPowerShellV2
-# - MicrosoftWindowsPowerShellV2Root
-# - Printing-XPSServices-Features
-# + Containers-DisposableClientVM (Windows Sandbox)
-# + TelnetClient
-New-OSBuildTask -SaveAs Template -TaskName "Windows 10 Education x64 2004 Features" -EnableFeature -DisableFeature
-
-# (Opcional) Crear un Template para añadir scripts
-New-OSBuildTask -SaveAs Template -TaskName "Windows 10 Education x64 2004 Scripts" -ContentScripts
-
-# Crear un Template para añadir los lenguajes usando un ContentPack
-New-OSBuildTask -SaveAs Template -TaskName "Windows 10 Education x64 2004 Languages" -AddContentPacks -SetAllIntl es-ES
-
-# Descargar OneDrive
-Get-DownOSDBuilder -ContentDownload 'OneDriveSetup Production'
-
-# Se actualiza la OSMedia con los últimos parches
-Update-OSMedia
-
-# (Opcional) Test rápido de la OSBuild creando un ISO
-New-OSBuild -ByTaskName "Windows 10 Education x64 2004 BLANK" -Execute -SkipComponentCleanup -SkipUpdates -SkipUpdatesPE -CreateISO
-
-# Se ejecuta la construcción de la OSBuild
-New-OSBuild -ByTaskName "Windows 10 Education x64 2004 BLANK" -Execute -Download
-```
-
 ## Desinstalar OSDBuilder
 
 Si por algún motivo es necesario desinstalar OSDBuilder y los módulos relacionados, se pueden ejecutar los siguientes comandos:
@@ -993,6 +1003,78 @@ Uninstall-Module -Name OSD -AllVersions -Force
 Uninstall-Module -Name OSDSUS -AllVersions -Force
 Uninstall-Module -Name OSDBuilder -AllVersions -Force
 Uninstall-Module -Name OSDUpdate -AllVersions -Force
+```
+
+## Actualizar OSDBuilder
+
+Durante la ejecución de OSDBuider, éste comprueba si existe una versión más actualizada de él mismo y de los módulos auxiliares.
+
+En el siguiente ejemplo se está ejecutando OSDBuilder 20.7.6.1 y OSDSUS 20.9.8.1 cuando ya se había publicado la [versión 20.9.29.1 para soportar Windows 10 2009 (20H2)](https://twitter.com/SeguraOSD/status/1311012490910797824). OSDBuilder lo indica con unos mensajes de _warning_:
+
+```
+PS C:\WINDOWS\system32> Get-OSDBuilder                                                                                  VERBOSE: Initializing OSDBuilder ...
+OSDBuilder 20.7.6.1 | OSDSUS 20.9.8.1 | OSD 20.8.19.1
+Home            V:\OSDBuilder\Prod
+-Content        V:\OSDBuilder\Share\Content
+-ContentPacks   V:\OSDBuilder\Share\ContentPacks
+-FeatureUpdates V:\OSDBuilder\Share\FeatureUpdates
+-OSImport       V:\OSDBuilder\Share\OSImport
+-OSMedia        V:\OSDBuilder\Share\OSMedia
+-OSBuilds       V:\OSDBuilder\Prod\OSBuilds
+-PEBuilds       V:\OSDBuilder\Prod\PEBuilds
+-Mount          V:\OSDBuilder\Share\Mount
+-Tasks          V:\OSDBuilder\Prod\Tasks
+-Templates      V:\OSDBuilder\Prod\Templates
+-Updates        V:\OSDBuilder\Share\Updates
+
+WARNING: OSDBuilder can be updated to 20.9.29.1
+OSDBuilder -Update
+
+WARNING: OSDSUS can be updated to 20.9.29.1
+Update-OSDSUS
+```
+
+En este caso hay que actualizar el módulo principal (OSDBuilder):
+
+```PowerShell
+OSDBuilder -Update
+```
+
+Este comando se encarga de desinstalar todos los módulos y de instalar los nuevos desde la PowerShell Gallery. Una vez finalizado el proceso es necesario reiniciar las sesiones de PowerShell para usar las nuevas versiones:
+
+```
+[...]
+WARNING: Uninstall-Module -Name OSDSUS -AllVersions -Force
+WARNING: Install-Module -Name OSDSUS -Force
+WARNING: Import-Module -Name OSDSUS -Force
+WARNING: Uninstall-Module -Name OSDBuilder -AllVersions -Force
+WARNING: Remove-Module -Name OSDBuilder -Force
+WARNING: Install-Module -Name OSDBuilder -Force
+WARNING: Update-Module -Name -Force OSDSUS
+WARNING: Import-Module -Name OSDSUS -Force
+WARNING: Import-Module -Name OSDBuilder -Force
+WARNING: Close all open PowerShell sessions before using OSDBuilder
+```
+
+> **Nota**: En otras ocasiones (como por ejemplo los _Patch Tuesday_) suele actualizarse únicamente el módulo OSD mediante el _cmdlet_ `Update-OSDSUS`.
+
+Una vez reiniciado PowerShell se comprueba que las nuevas versiones ya están en uso:
+
+```
+PS C:\WINDOWS\system32> Get-OSDBuilder                                                                                  VERBOSE: Initializing OSDBuilder ...
+OSDBuilder 20.9.29.1 | OSDSUS 20.9.29.1 | OSD 20.8.19.1
+Home            V:\OSDBuilder\Prod
+-Content        V:\OSDBuilder\Share\Content
+-ContentPacks   V:\OSDBuilder\Share\ContentPacks
+-FeatureUpdates V:\OSDBuilder\Share\FeatureUpdates
+-OSImport       V:\OSDBuilder\Share\OSImport
+-OSMedia        V:\OSDBuilder\Share\OSMedia
+-OSBuilds       V:\OSDBuilder\Prod\OSBuilds
+-PEBuilds       V:\OSDBuilder\Prod\PEBuilds
+-Mount          V:\OSDBuilder\Share\Mount
+-Tasks          V:\OSDBuilder\Prod\Tasks
+-Templates      V:\OSDBuilder\Prod\Templates
+-Updates        V:\OSDBuilder\Share\Updates
 ```
 
 ## Anexo
@@ -1085,79 +1167,7 @@ En el entorno
 | Microsoft.ZuneMusic | Groove Música | Eliminar | |
 | Microsoft.ZuneVideo | Películas y TV | Eliminar | |
 
-### Actualización de OSDBuilder
-
-Durante la ejecución de OSDBuider, éste comprueba si existe una versión más actualizada de él mismo y de los módulos auxiliares.
-
-En el siguiente ejemplo se está ejecutando OSDBuilder 20.7.6.1 y OSDSUS 20.9.8.1 cuando ya se había publicado la [versión 20.9.29.1 para soportar Windows 10 2009 (20H2)](https://twitter.com/SeguraOSD/status/1311012490910797824). OSDBuilder lo indica con unos mensajes de _warning_:
-
-```
-PS C:\WINDOWS\system32> Get-OSDBuilder                                                                                  VERBOSE: Initializing OSDBuilder ...
-OSDBuilder 20.7.6.1 | OSDSUS 20.9.8.1 | OSD 20.8.19.1
-Home            V:\OSDBuilder\Prod
--Content        V:\OSDBuilder\Share\Content
--ContentPacks   V:\OSDBuilder\Share\ContentPacks
--FeatureUpdates V:\OSDBuilder\Share\FeatureUpdates
--OSImport       V:\OSDBuilder\Share\OSImport
--OSMedia        V:\OSDBuilder\Share\OSMedia
--OSBuilds       V:\OSDBuilder\Prod\OSBuilds
--PEBuilds       V:\OSDBuilder\Prod\PEBuilds
--Mount          V:\OSDBuilder\Share\Mount
--Tasks          V:\OSDBuilder\Prod\Tasks
--Templates      V:\OSDBuilder\Prod\Templates
--Updates        V:\OSDBuilder\Share\Updates
-
-WARNING: OSDBuilder can be updated to 20.9.29.1
-OSDBuilder -Update
-
-WARNING: OSDSUS can be updated to 20.9.29.1
-Update-OSDSUS
-```
-
-En este caso hay que actualizar el módulo principal (OSDBuilder):
-
-```PowerShell
-OSDBuilder -Update
-```
-
-Este comando se encarga de desinstalar todos los módulos y de instalar los nuevos desde la PowerShell Gallery. Una vez finalizado el proceso es necesario reiniciar las sesiones de PowerShell para usar las nuevas versiones:
-
-```
-[...]
-WARNING: Uninstall-Module -Name OSDSUS -AllVersions -Force
-WARNING: Install-Module -Name OSDSUS -Force
-WARNING: Import-Module -Name OSDSUS -Force
-WARNING: Uninstall-Module -Name OSDBuilder -AllVersions -Force
-WARNING: Remove-Module -Name OSDBuilder -Force
-WARNING: Install-Module -Name OSDBuilder -Force
-WARNING: Update-Module -Name -Force OSDSUS
-WARNING: Import-Module -Name OSDSUS -Force
-WARNING: Import-Module -Name OSDBuilder -Force
-WARNING: Close all open PowerShell sessions before using OSDBuilder
-```
-
-> **Nota**: En otras ocasiones (como por ejemplo los _Patch Tuesday_) suele actualizarse únicamente el módulo OSD mediante el _cmdlet_ `Update-OSDSUS`.
-
-Una vez reiniciado PowerShell se comprueba que las nuevas versiones ya están en uso:
-
-```
-PS C:\WINDOWS\system32> Get-OSDBuilder                                                                                  VERBOSE: Initializing OSDBuilder ...
-OSDBuilder 20.9.29.1 | OSDSUS 20.9.29.1 | OSD 20.8.19.1
-Home            V:\OSDBuilder\Prod
--Content        V:\OSDBuilder\Share\Content
--ContentPacks   V:\OSDBuilder\Share\ContentPacks
--FeatureUpdates V:\OSDBuilder\Share\FeatureUpdates
--OSImport       V:\OSDBuilder\Share\OSImport
--OSMedia        V:\OSDBuilder\Share\OSMedia
--OSBuilds       V:\OSDBuilder\Prod\OSBuilds
--PEBuilds       V:\OSDBuilder\Prod\PEBuilds
--Mount          V:\OSDBuilder\Share\Mount
--Tasks          V:\OSDBuilder\Prod\Tasks
--Templates      V:\OSDBuilder\Prod\Templates
--Updates        V:\OSDBuilder\Share\Updates
-```
-
-### Opciones a explorar
+## Opciones a explorar
 
 A la hora de habilitar/deshabilitar características de Windows se podrían explorar las siguientes opciones:
 
