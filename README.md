@@ -1119,7 +1119,7 @@ Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\.NetFramework\v4.0.30319' -Name
 
 A la hora de decidir qué [aplicaciones universales AppX](https://docs.microsoft.com/en-us/windows/application-management/apps-in-windows-10) se eliminan de las OSBuild pueden ser útiles las tablas de los artículos de [Anton Romanyuk (Vacuum Breather)](https://www.vacuumbreather.com/index.php/blog/item/87-windows-10-1903-built-in-apps-what-to-keep) y de [Mike Galvin](https://gal.vin/2017/04/06/removing-uwp-apps-mdt/).
 
-En el entorno 
+En nuestro entorno se suelen eliminar las aplicaciones indicadas en la siguiente tabla:
 
 | Paquete | Aplicación | Decisión | Notas |
 | --- | --- | :---: | --- |
