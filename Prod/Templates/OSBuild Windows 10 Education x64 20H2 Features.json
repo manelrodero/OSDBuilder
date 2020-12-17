@@ -1,16 +1,16 @@
 {
     "TaskType":  "OSBuild",
-    "TaskVersion":  "20.9.29.1",
-    "TaskGuid":  "71f184fa-aa5f-4540-8dfd-e5e24c8fc08f",
+    "TaskVersion":  "20.12.10.1",
+    "TaskGuid":  "96ce4bb9-6376-4447-af7c-006e59ae08dc",
     "TaskName":  "Windows 10 Education x64 20H2 Features",
     "CustomName":  "",
     "OSMFamily":  "Client Education x64 19042 es-ES",
-    "OSMGuid":  "98d9c09d-436d-4fd9-bfae-23294d862a60",
-    "Name":  "Windows 10 Education x64 2009 19042.450 es-ES",
+    "OSMGuid":  "fb282879-f3c5-4fc2-bb02-8475631bb48e",
+    "Name":  "Windows 10 Education x64 2009 19042.508 es-ES",
     "ImageName":  "Windows 10 Education",
     "Arch":  "x64",
     "ReleaseId":  "2009",
-    "UBR":  "19042.450",
+    "UBR":  "19042.508",
     "Languages":  [
                       "es-ES"
                   ],
@@ -18,8 +18,8 @@
     "InstallationType":  "Client",
     "MajorVersion":  "10",
     "Build":  "19041",
-    "CreatedTime":  "\/Date(1597386021868)\/",
-    "ModifiedTime":  "\/Date(1602315326263)\/",
+    "CreatedTime":  "\/Date(1601234126169)\/",
+    "ModifiedTime":  "\/Date(1608059789323)\/",
     "ContentPacks":  null,
     "EnableNetFX3":  "False",
     "WinPEAutoExtraFiles":  "False",
@@ -33,7 +33,9 @@
                                       ],
     "EnableWindowsOptionalFeature":  [
                                          "Containers-DisposableClientVM",
-                                         "TelnetClient"
+                                         "Microsoft-Windows-Subsystem-Linux",
+                                         "TelnetClient",
+                                         "VirtualMachinePlatform"
                                      ],
     "Drivers":  null,
     "ExtraFiles":  null,

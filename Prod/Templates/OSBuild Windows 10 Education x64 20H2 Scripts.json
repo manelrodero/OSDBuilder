@@ -1,16 +1,16 @@
 {
     "TaskType":  "OSBuild",
-    "TaskVersion":  "20.9.29.1",
-    "TaskGuid":  "a35756c1-11ef-481a-a85d-4f84ad4c46ab",
+    "TaskVersion":  "20.12.10.1",
+    "TaskGuid":  "2159cc08-500a-40fb-8a6e-4d8c54f2a3b1",
     "TaskName":  "Windows 10 Education x64 20H2 Scripts",
     "CustomName":  "",
     "OSMFamily":  "Client Education x64 19042 es-ES",
-    "OSMGuid":  "98d9c09d-436d-4fd9-bfae-23294d862a60",
-    "Name":  "Windows 10 Education x64 2009 19042.450 es-ES",
+    "OSMGuid":  "fb282879-f3c5-4fc2-bb02-8475631bb48e",
+    "Name":  "Windows 10 Education x64 2009 19042.508 es-ES",
     "ImageName":  "Windows 10 Education",
     "Arch":  "x64",
     "ReleaseId":  "2009",
-    "UBR":  "19042.450",
+    "UBR":  "19042.508",
     "Languages":  [
                       "es-ES"
                   ],
@@ -18,8 +18,8 @@
     "InstallationType":  "Client",
     "MajorVersion":  "10",
     "Build":  "19041",
-    "CreatedTime":  "\/Date(1597386021868)\/",
-    "ModifiedTime":  "\/Date(1602315326263)\/",
+    "CreatedTime":  "\/Date(1601234126169)\/",
+    "ModifiedTime":  "\/Date(1608059789323)\/",
     "ContentPacks":  null,
     "EnableNetFX3":  "False",
     "WinPEAutoExtraFiles":  "False",
@@ -29,9 +29,7 @@
     "DisableWindowsOptionalFeature":  null,
     "EnableWindowsOptionalFeature":  null,
     "Drivers":  null,
-    "ExtraFiles":  [
-                       "ExtraFiles\\Windows 10 Scripts"
-                   ],
+    "ExtraFiles":  null,
     "Scripts":  [
                     "Scripts\\Global Add-DesktopIcons.ps1",
                     "Scripts\\Global Set-ConsoleOptions.ps1",
