@@ -33,8 +33,8 @@ $LPs = @{
     '2009' = @{
         ISO          = 'E:\EQUIPS\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_32_64_ARM64_MultiLang_LangPackAll_LIP_X22-21307.iso'
         ISOExtraLXP  = 'E:\EQUIPS\ISOs\Win10\20H2\SW_DVD9_NTRL_Win_10_2004_32_64_ARM64_MultiLng_LngPkAll_LIP_9B_LXP_ONLY_X22-38606.iso'
-        Languages    = @('es-es', 'en-us', 'fr-fr')
-        LanguagesLXP = @('ca-es', 'es-es', 'en-us', 'fr-fr')
+        Languages    = @('es-es', 'en-us', 'fr-fr', 'da-dk')
+        LanguagesLXP = @('ca-es', 'es-es', 'en-us', 'fr-fr', 'da-dk')
         BaseLanguage = 'es-es'
     }
 }

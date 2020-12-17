@@ -29,7 +29,7 @@ $LPs = @{
     }
     '2009' = @{
         ISO          = 'E:\EQUIPS\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_64Bit_MultiLang_FOD_1_X22-21311.iso'
-        Languages    = @('es-es', 'en-us', 'fr-fr', 'ca-es')
+        Languages    = @('es-es', 'en-us', 'fr-fr', 'ca-es', 'da-dk')
         BaseLanguage = 'es-es'
     }
 }
