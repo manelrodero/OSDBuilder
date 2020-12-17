@@ -33,7 +33,9 @@
                                       ],
     "EnableWindowsOptionalFeature":  [
                                          "Containers-DisposableClientVM",
-                                         "TelnetClient"
+                                         "Microsoft-Windows-Subsystem-Linux",
+                                         "TelnetClient",
+                                         "VirtualMachinePlatform"
                                      ],
     "Drivers":  null,
     "ExtraFiles":  null,
