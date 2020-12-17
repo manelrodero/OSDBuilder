@@ -734,7 +734,7 @@ New-OSBuildTask -SaveAs Task -TaskName "Windows 10 Education x64 2004 BLANK" -Cu
 # 1) Seleccionar todas las aplicaciones de la lista
 # 2) Editar el fichero JSON
 # 3) Borrar las que se conservan según la tabla del Anexo
-New-OSBuildTask -SaveAs Template -TaskName 'Windows 10 Education x64 2004 Appx' -RemoveAppx
+New-OSBuildTask -SaveAs Template -TaskName "Windows 10 Education x64 2004 Appx" -RemoveAppx
 
 # Crear un Template para habilitar/deshabilitar las Features que se consideren
 # - MicrosoftWindowsPowerShellV2
@@ -1131,11 +1131,12 @@ En nuestro entorno se suelen eliminar las aplicaciones indicadas en la siguiente
 | Microsoft.HEIFImageExtension | Extensiones de imagen HEIF | Conservar | |
 | Microsoft.Messaging | Mensajes | Eliminar | Eliminada en 2004 |
 | Microsoft.Microsoft3DViewer | Visor 3D | Eliminar | |
+| Microsoft.MicrosoftEdge.Stable | Microsoft Edge | Conservar | Nueva en 20H2 |
 | Microsoft.MicrosoftOfficeHub | Office | Eliminar | |
 | Microsoft.MicrosoftSolitaireCollection | Microsoft Solitaire Collection | Eliminar | |
 | Microsoft.MicrosoftStickyNotes | Sticky Notes | Conservar | |
 | Microsoft.MixedReality.Portal | Portal de realidad mixta | Eliminar | |
-| Microsoft.MSPaint | Paint 3D | Eliminar | |
+| Microsoft.MSPaint | Paint 3D | Eliminar | Opcional |
 | Microsoft.Office.OneNote | OneNote | Eliminar | |
 | Microsoft.OneConnect | Planes móviles | Eliminar | Eliminada en 2004 |
 | Microsoft.People | Contactos | Eliminar | |
