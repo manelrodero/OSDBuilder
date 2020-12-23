@@ -2,14 +2,11 @@
 #   http://www.manelrodero.com/
 #
 #   OSBuilder Script
-#   Disable-EdgeShortcut.ps1
+#   Disable-TailoredExperiences.ps1
 
 #======================================================================================
 #   Remove Files
 #======================================================================================
-if (Test-Path "$MountDirectory\Users\Public\Desktop\Microsoft Edge.lnk") {
-    Remove-Item -Path "$MountDirectory\Users\Public\Desktop\Microsoft Edge.lnk" -Force | Out-Null
-}
 
 #======================================================================================
 #   Load Registry Hives
@@ -39,9 +36,11 @@ if (Test-Path $RegSystem) {
 #   Registry Commands
 #======================================================================================
 
+# User Configuration\ Administrative Templates\ Windows Components\ Cloud Content\
+# https://gpsearch.azurewebsites.net/#13573
+
 $RegCommands =
-'add HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer /v DisableEdgeDesktopShortcutCreation /t REG_DWORD /d 1 /f',
-'add HKLM\Software\Policies\Microsoft\EdgeUpdate /v CreateDesktopShortcutDefault /t REG_DWORD /d 0 /f'
+'add "HKCU\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableTailoredExperiencesWithDiagnosticData" /t REG_DWORD /d 1 /f'
 
 foreach ($Command in $RegCommands) {
     if ($Command -like "*HKCU*") {

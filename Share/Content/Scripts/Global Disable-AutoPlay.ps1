@@ -2,14 +2,11 @@
 #   http://www.manelrodero.com/
 #
 #   OSBuilder Script
-#   Disable-EdgeShortcut.ps1
+#   Disable-AutoPlay.ps1
 
 #======================================================================================
 #   Remove Files
 #======================================================================================
-if (Test-Path "$MountDirectory\Users\Public\Desktop\Microsoft Edge.lnk") {
-    Remove-Item -Path "$MountDirectory\Users\Public\Desktop\Microsoft Edge.lnk" -Force | Out-Null
-}
 
 #======================================================================================
 #   Load Registry Hives
@@ -39,9 +36,11 @@ if (Test-Path $RegSystem) {
 #   Registry Commands
 #======================================================================================
 
+# Computer Configuration\ Administrative Templates\ Windows Components\ AutoPlay Policies\
+# https://gpsearch.azurewebsites.net/#34
+
 $RegCommands =
-'add HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer /v DisableEdgeDesktopShortcutCreation /t REG_DWORD /d 1 /f',
-'add HKLM\Software\Policies\Microsoft\EdgeUpdate /v CreateDesktopShortcutDefault /t REG_DWORD /d 0 /f'
+'add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoDriveTypeAutoRun" /t REG_DWORD /d 0xff /f'
 
 foreach ($Command in $RegCommands) {
     if ($Command -like "*HKCU*") {

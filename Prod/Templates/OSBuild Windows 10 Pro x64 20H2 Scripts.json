@@ -29,19 +29,24 @@
     "DisableWindowsOptionalFeature":  null,
     "EnableWindowsOptionalFeature":  null,
     "Drivers":  null,
-    "ExtraFiles":  null,
+    "ExtraFiles":  [
+                       "ExtraFiles\\Windows 10 Scripts"
+                   ],
     "Scripts":  [
                     "Scripts\\Global Add-DesktopIcons.ps1",
+                    "Scripts\\Global Disable-AutoPlay.ps1",
                     "Scripts\\Global Set-ConsoleOptions.ps1",
                     "Scripts\\Global Set-ControlPanelConfiguration.ps1",
                     "Scripts\\Global Set-FileExplorerOptions.ps1",
                     "Scripts\\Global Set-FirstDayOfWeek.ps1",
+                    "Scripts\\Global Set-StartMenuOptions.ps1",                    
                     "Scripts\\Global Set-TimeZoneRomance.ps1",
                     "Scripts\\Windows 10 Disable-ConsumerApps.ps1",
                     "Scripts\\Windows 10 Disable-CortanaSearch.ps1",
                     "Scripts\\Windows 10 Disable-DriversFromWindowsUpdate.ps1",
                     "Scripts\\Windows 10 Disable-EdgeShortcut.ps1",
                     "Scripts\\Windows 10 Disable-PrivacySettingsExperience.ps1",
+                    "Scripts\\Windows 10 Disable-TailoredExperiences.ps1",
                     "Scripts\\Windows 10 Disable-WebSearch.ps1",
                     "Scripts\\Windows 10 Force-WinUserLanguageList.ps1"
                 ],

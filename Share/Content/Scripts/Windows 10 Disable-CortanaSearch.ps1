@@ -35,6 +35,10 @@ if (Test-Path $RegSystem) {
 #======================================================================================
 #   Registry Commands
 #======================================================================================
+
+# Computer Configuration\ Administrative Templates\ Windows Components\ Search\
+# https://gpsearch.azurewebsites.net/#10992
+
 $RegCommands =
 'add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /t REG_DWORD /d 0 /f'
 
