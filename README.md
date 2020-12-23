@@ -704,6 +704,20 @@ En nuestro entorno se suelen incluir los siguientes paquetes:
 
 > **Nota**: Antes de poder seleccionar los lenguajes, es necesario crear los **ContentPack** tal como se explica más adelante (ver apartados **OSLanguagePacks** y **OSLanguageFeatures**).
 
+### Menú de inicio
+
+```PowerShell
+# (Opcional) Crear un Template para añadir un menú de inicio
+# New-OSBuildTask -SaveAs Template -TaskName "Windows 10 Education x64 1909 Start Menu" -ContentStartLayout
+
+# Crear un Template para añadir un menú de inicio usando un ContentPack
+New-OSBuildTask -SaveAs Template -TaskName "Windows 10 Education x64 1909 Start Menu" -AddContentPacks
+```
+
+Los XML que se pueden seleccionar mediante los comandos anteriores son **Content** que estén en el directorio `V:\OSDBuilder\Share\Content\StartLayout` o **ContentPack** que estén en el directorio `V:\OSDBuilder\Share\ContentPacks`.
+
+> **Nota**: Antes de poder seleccionar los menús de inicio, es necesario crear los **Content** o **ContentPack** tal como se explica más adelante (ver apartado **OSStartLayout**).
+
 ### (Opcional) Test de una OSBuild
 
 Para comprobar una **OSBuild** de forma rápida se puede ejecutar el siguiente comando:
@@ -751,6 +765,9 @@ New-OSBuildTask -SaveAs Template -TaskName "Windows 10 Education x64 2004 Script
 
 # Crear un Template para añadir los lenguajes usando ContentPacks que se hayan creado con anterioridad
 New-OSBuildTask -SaveAs Template -TaskName "Windows 10 Education x64 2004 Languages" -AddContentPacks -SetAllIntl es-ES
+
+# Crear un Template para añadir un menú de inicio usando Content que se haya creado con anterioridad
+New-OSBuildTask -SaveAs Template -TaskName "Windows 10 Education x64 1909 Start Menu" -ContentStartLayout
 
 # Descargar OneDrive
 Get-DownOSDBuilder -ContentDownload 'OneDriveSetup Production'
@@ -906,6 +923,27 @@ Save-Module -Name PackageManagement -Path V:\OSDBuilder\Share\ContentPacks\_Glob
 [OSStartLayout](https://osdbuilder.osdeploy.com/docs/contentpacks/content/osstartlayout) sirve para añadir un layout del *Menú de Inicio* en formato XML.
 
 La documentación de Microsoft [Customize and export Start layout](https://docs.microsoft.com/en-us/windows/configuration/customize-and-export-start-layout) explica como configurar un menú en un equipo y exportarlo a formato XML y así poder usarlo en este ContentPack.
+
+El procedimiento básico es el siguiente:
+
+* Crear un usuario `test` en una máquina de pruebas
+* Iniciar sesión con el usuario anterior
+* Configurar el menú de inicio como se desee
+* Exportar el menú de inicio
+
+```
+Export-StartLayout -UseDesktopApplicationID -Path StartLayout.xml
+```
+
+Adicionalmente, se podría:
+
+* Añadir una configuración de la [barra de tareas](https://docs.microsoft.com/en-us/windows/configuration/configure-windows-10-taskbar)
+* Modificar el [menú de inicio](https://docs.microsoft.com/en-us/windows/configuration/start-layout-xml-desktop) para añadir/quitar/posicionar los diferentes elementos
+* Bloquear el menú de inicio de forma parcial, cambiando `<DefaultLayoutOverride>` por:
+
+```
+<DefaultLayoutOverride LayoutCustomizationRestrictionType="OnlySpecifiedGroups">
+```
 
 ### PEADK
 
