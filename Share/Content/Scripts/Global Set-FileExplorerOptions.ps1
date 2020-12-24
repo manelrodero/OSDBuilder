@@ -39,7 +39,6 @@ if (Test-Path $RegSystem) {
 # Folder Options > General > Open File Explorer to: This PC (instead of Quick Access)
 # Folder Options > General > Privacy: Show recently used files in Quick access (disable)
 # Folder Options > General > Privacy: Show frequently used folders in Quick Access (disable)
-# Folder Options > General > Privacy: Show frequently used folders in Quick Access (disable)
 # Folder Options > View > Display the full path in the title bar (enable)
 # Folder Options > View > Hide extensions for known file types (disable)
 # Folder Options > View > Use Sharing Wizard (disable)
@@ -49,7 +48,6 @@ if (Test-Path $RegSystem) {
 $RegCommands =
 'add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v LaunchTo /t REG_DWORD /d 1 /f',
 'add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v ShowRecent /t REG_DWORD /d 0 /f',
-'add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v ShowFrequent /t REG_DWORD /d 0 /f',
 'add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v ShowFrequent /t REG_DWORD /d 0 /f',
 'add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState" /v FullPath /t REG_DWORD /d 1 /f',
 'add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v HideFileExt /t REG_DWORD /d 0 /f',
