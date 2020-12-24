@@ -27,6 +27,7 @@
     "RemoveWindowsCapability":  null,
     "RemoveWindowsPackage":  null,
     "DisableWindowsOptionalFeature":  [
+                                          "Internet-Explorer-Optional-amd64",
                                           "MicrosoftWindowsPowerShellV2",
                                           "MicrosoftWindowsPowerShellV2Root",
                                           "Printing-XPSServices-Features"

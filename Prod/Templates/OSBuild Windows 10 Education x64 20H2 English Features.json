@@ -27,13 +27,16 @@
     "RemoveWindowsCapability":  null,
     "RemoveWindowsPackage":  null,
     "DisableWindowsOptionalFeature":  [
+                                          "Internet-Explorer-Optional-amd64",
                                           "MicrosoftWindowsPowerShellV2",
                                           "MicrosoftWindowsPowerShellV2Root",
                                           "Printing-XPSServices-Features"
                                       ],
     "EnableWindowsOptionalFeature":  [
                                          "Containers-DisposableClientVM",
-                                         "TelnetClient"
+                                         "Microsoft-Windows-Subsystem-Linux",
+                                         "TelnetClient",
+                                         "VirtualMachinePlatform"
                                      ],
     "Drivers":  null,
     "ExtraFiles":  null,
