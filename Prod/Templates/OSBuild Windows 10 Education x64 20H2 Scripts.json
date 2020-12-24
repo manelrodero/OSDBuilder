@@ -41,6 +41,7 @@
                     "Scripts\\Global Set-FirstDayOfWeek.ps1",
                     "Scripts\\Global Set-StartMenuOptions.ps1",                    
                     "Scripts\\Global Set-TimeZoneRomance.ps1",
+                    "Scripts\\Windows 10 Disable-AutocorrectMisspelledWords",
                     "Scripts\\Windows 10 Disable-ConsumerApps.ps1",
                     "Scripts\\Windows 10 Disable-CortanaSearch.ps1",
                     "Scripts\\Windows 10 Disable-DriversFromWindowsUpdate.ps1",
