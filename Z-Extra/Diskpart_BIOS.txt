@@ -1,0 +1,41 @@
+rem ---------------------------------------------------
+rem Particionado BIOS del entorno inLab FIB
+rem https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-biosmbr-based-hard-drive-partitions
+rem v1.0 - Versión inicial 
+rem ---------------------------------------------------
+
+rem ---------------------------------------------------
+rem Seleccionar disco 0, borrarlo y convertirlo a MBR
+rem ---------------------------------------------------
+select disk 0
+clean
+convert mbr
+
+rem ---------------------------------------------------
+rem Partición Windows de 128GB, NTFS, C:
+rem ---------------------------------------------------
+rem create partition primary size=131072
+rem format quick fs=ntfs label="SISTEMA"
+rem assign letter=C
+rem active
+
+rem ---------------------------------------------------
+rem Partición Datos con el resto de espacio, NTFS, D:
+rem ---------------------------------------------------
+rem create partition primary
+rem format quick fs=ntfs label="DADES"
+rem assign letter=D
+
+rem ---------------------------------------------------
+rem Partición Windows con el resto de espacio, NTFS, C:
+rem ---------------------------------------------------
+create partition primary
+format quick fs=ntfs label="Windows"
+assign letter=C
+active
+
+rem ---------------------------------------------------
+rem Exit Diskpart
+rem ---------------------------------------------------
+list volume
+exit

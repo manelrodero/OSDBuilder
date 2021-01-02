@@ -1,0 +1,94 @@
+rem ---------------------------------------------------
+rem Particionado UEFI/GPT
+rem https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-uefigpt-based-hard-drive-partitions
+rem
+rem v1.0 - Versión inicial 
+rem v2.0 - Incremento tamaño EFI/Recuperación (HP)
+rem v2.1 - Documentación del fichero (comentarios)
+rem ---------------------------------------------------
+
+rem ---------------------------------------------------
+rem Seleccionar disco 0, borrarlo y convertirlo a GPT
+rem ---------------------------------------------------
+select disk 0
+clean
+convert gpt
+
+rem ---------------------------------------------------
+rem Partición EFI de 260MB, FAT32, etiqueta "EFI"
+rem - Minimum   = 100MB
+rem - 4K Drives = 260MB
+rem - Adaptiva  = 500MB
+rem - UPCnet    = 260MB
+rem ---------------------------------------------------
+create partition efi size=260
+format quick fs=fat32 label="EFI"
+assign letter=S
+
+rem ---------------------------------------------------
+rem Partición MSR de 128MB (sin formatear)
+rem - Adaptiva = 128MB
+rem - UPCnet   = 128MB
+rem ---------------------------------------------------
+create partition msr size=128
+
+rem ---------------------------------------------------
+rem Partición Windows de 128GB, NTFS, C:
+rem ---------------------------------------------------
+rem create partition primary size=131072
+rem format quick fs=ntfs label="SISTEMA"
+rem assign letter=C
+
+rem ---------------------------------------------------
+rem Partición Datos con el resto de espacio, NTFS, D:
+rem - Reducción de 984MB para "Recovery" (WinRE Tools)
+rem - Reducción de xGB+984MB si hay "Recovery Image"
+rem ---------------------------------------------------
+rem create partition primary
+rem shrink minimum=984
+rem format quick fs=ntfs label="DADES"
+rem assign letter=D
+
+rem ---------------------------------------------------
+rem Partición Windows con el resto de espacio, NTFS, C:
+rem - Reducción de 984MB para "Recovery" (WinRE Tools)
+rem - Reducción de xGB+984MB si hay "Recovery Image"
+rem ---------------------------------------------------
+create partition primary
+shrink minimum=984
+format quick fs=ntfs label="Windows"
+assign letter=C
+
+rem ---------------------------------------------------
+rem Partición "Recovery" (WinRE Tools) de 984MB
+rem https://superuser.com/questions/1108243/setting-winre-windows-recovery-environment-flag-on-partitions
+rem
+rem - id = Recovery Flag
+rem - attributes = More protection; acumulative value
+rem - 0x8000000000000000 - Prevent assigning drive letter
+rem - 0x0000000000000001 - Required partition by system
+rem
+rem - Adaptiva = 500MB
+rem - UPCnet   = 490MB
+rem ---------------------------------------------------
+create partition primary
+format quick fs=ntfs label="Recovery"
+assign letter=R
+set id="de94bba4-06d1-4d40-a16a-bfd50179d6ac"
+gpt attributes=0x8000000000000001
+
+rem ---------------------------------------------------
+rem Partición "Recovery Image" de XGB
+rem - En partición de datos, shrink = xGB+984MB
+rem - En la partición "Recovery" especificar size=984MB
+rem ---------------------------------------------------
+rem create partition primary
+rem format quick fs=ntfs label="Recovery Image"
+rem assign letter=I
+rem set id=de94bba4-06d1-4d40-a16a-bfd50179d6ac
+rem gpt attributes=0x8000000000000001
+
+rem ---------------------------------------------------
+rem Exit Diskpart
+rem ---------------------------------------------------
+exit
