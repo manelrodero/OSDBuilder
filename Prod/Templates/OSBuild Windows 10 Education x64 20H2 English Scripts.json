@@ -46,6 +46,7 @@
                     "Scripts\\Windows 10 Disable-CortanaSearch.ps1",
                     "Scripts\\Windows 10 Disable-DriversFromWindowsUpdate.ps1",
                     "Scripts\\Windows 10 Disable-EdgeShortcut.ps1",
+                    "Scripts\\Windows 10 Disable-NewsFeeds.ps1",
                     "Scripts\\Windows 10 Disable-PrivacySettingsExperience.ps1",
                     "Scripts\\Windows 10 Disable-TailoredExperiences.ps1",                    
                     "Scripts\\Windows 10 Disable-WebSearch.ps1",
