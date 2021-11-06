@@ -179,6 +179,16 @@ Formatted using XML Formatter: https://www.webtoolkitonline.com/xml-formatter.ht
                     <CommandLine>setx.exe DIRCMD /OGN /M</CommandLine>
                     <Description>Set DIRCMD Options</Description>
                 </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>9</Order>
+                    <CommandLine>setx.exe devmgr_show_nonpresent_devices 1 /M</CommandLine>
+                    <Description>Show non present devices</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>10</Order>
+                    <CommandLine>reg.exe add "HKLM\System\CurrentControlSet\Control\Network\NewNetworkWindowOff" /f</CommandLine>
+                    <Description>Disable New Network Window</Description>
+                </SynchronousCommand>
             </FirstLogonCommands>
             <TimeZone>Romance Standard Time</TimeZone>
             <ShowPowerButtonOnStartScreen>true</ShowPowerButtonOnStartScreen>
