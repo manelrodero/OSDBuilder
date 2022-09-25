@@ -2,6 +2,7 @@ rem ---------------------------------------------------
 rem Particionado BIOS del entorno inLab FIB
 rem https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-biosmbr-based-hard-drive-partitions
 rem v1.0 - Versión inicial 
+rem v1.1 - Partición Windows 200GB
 rem ---------------------------------------------------
 
 rem ---------------------------------------------------
@@ -12,10 +13,10 @@ clean
 convert mbr
 
 rem ---------------------------------------------------
-rem Partición Windows de 128GB, NTFS, C:
+rem Partición Windows de 200GB, NTFS, C:
 rem ---------------------------------------------------
-rem create partition primary size=131072
-rem format quick fs=ntfs label="SISTEMA"
+rem create partition primary size=204800
+rem format quick fs=ntfs label="Windows"
 rem assign letter=C
 rem active
 
@@ -23,7 +24,7 @@ rem ---------------------------------------------------
 rem Partición Datos con el resto de espacio, NTFS, D:
 rem ---------------------------------------------------
 rem create partition primary
-rem format quick fs=ntfs label="DADES"
+rem format quick fs=ntfs label="Data"
 rem assign letter=D
 
 rem ---------------------------------------------------

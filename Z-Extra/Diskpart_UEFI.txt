@@ -5,6 +5,7 @@ rem
 rem v1.0 - Versión inicial 
 rem v2.0 - Incremento tamaño EFI/Recuperación (HP)
 rem v2.1 - Documentación del fichero (comentarios)
+rem v2.1 - Partición Windows 200GB
 rem ---------------------------------------------------
 
 rem ---------------------------------------------------
@@ -33,10 +34,10 @@ rem ---------------------------------------------------
 create partition msr size=128
 
 rem ---------------------------------------------------
-rem Partición Windows de 128GB, NTFS, C:
+rem Partición Windows de 200GB, NTFS, C:
 rem ---------------------------------------------------
-rem create partition primary size=131072
-rem format quick fs=ntfs label="SISTEMA"
+rem create partition primary size=204800
+rem format quick fs=ntfs label="Windows"
 rem assign letter=C
 
 rem ---------------------------------------------------
@@ -46,7 +47,7 @@ rem - Reducción de xGB+984MB si hay "Recovery Image"
 rem ---------------------------------------------------
 rem create partition primary
 rem shrink minimum=984
-rem format quick fs=ntfs label="DADES"
+rem format quick fs=ntfs label="Data"
 rem assign letter=D
 
 rem ---------------------------------------------------
