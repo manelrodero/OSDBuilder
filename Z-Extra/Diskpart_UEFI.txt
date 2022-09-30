@@ -2,10 +2,11 @@ rem ---------------------------------------------------
 rem Particionado UEFI/GPT
 rem https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-uefigpt-based-hard-drive-partitions
 rem
-rem v1.0 - Versión inicial 
+rem v1.0 - Versión inicial
 rem v2.0 - Incremento tamaño EFI/Recuperación (HP)
 rem v2.1 - Documentación del fichero (comentarios)
-rem v2.1 - Partición Windows 200GB
+rem v2.2 - Partición Windows 200GB
+rem v2.3 - Partición EFI 496MB
 rem ---------------------------------------------------
 
 rem ---------------------------------------------------
@@ -21,8 +22,9 @@ rem - Minimum   = 100MB
 rem - 4K Drives = 260MB
 rem - Adaptiva  = 500MB
 rem - UPCnet    = 260MB
+rem - Gary Blok = 496MB
 rem ---------------------------------------------------
-create partition efi size=260
+create partition efi size=496
 format quick fs=fat32 label="EFI"
 assign letter=S
 
@@ -46,7 +48,7 @@ rem - Reducción de 984MB para "Recovery" (WinRE Tools)
 rem - Reducción de xGB+984MB si hay "Recovery Image"
 rem ---------------------------------------------------
 rem create partition primary
-rem shrink minimum=984
+rem shrink desired=984 minimum=984
 rem format quick fs=ntfs label="Data"
 rem assign letter=D
 
@@ -56,7 +58,7 @@ rem - Reducción de 984MB para "Recovery" (WinRE Tools)
 rem - Reducción de xGB+984MB si hay "Recovery Image"
 rem ---------------------------------------------------
 create partition primary
-shrink minimum=984
+shrink desired=984 minimum=984
 format quick fs=ntfs label="Windows"
 assign letter=C
 
@@ -69,8 +71,9 @@ rem - attributes = More protection; acumulative value
 rem - 0x8000000000000000 - Prevent assigning drive letter
 rem - 0x0000000000000001 - Required partition by system
 rem
-rem - Adaptiva = 500MB
-rem - UPCnet   = 490MB
+rem - Adaptiva     = 500MB
+rem - UPCnet       = 490MB
+rem - David Segura = 984MB
 rem ---------------------------------------------------
 create partition primary
 format quick fs=ntfs label="Recovery"
@@ -92,4 +95,5 @@ rem gpt attributes=0x8000000000000001
 rem ---------------------------------------------------
 rem Exit Diskpart
 rem ---------------------------------------------------
+list partition
 exit

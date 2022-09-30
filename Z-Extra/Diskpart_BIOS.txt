@@ -1,7 +1,8 @@
 rem ---------------------------------------------------
 rem Particionado BIOS del entorno inLab FIB
 rem https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-biosmbr-based-hard-drive-partitions
-rem v1.0 - Versión inicial 
+rem
+rem v1.0 - Versión inicial
 rem v1.1 - Partición Windows 200GB
 rem ---------------------------------------------------
 
