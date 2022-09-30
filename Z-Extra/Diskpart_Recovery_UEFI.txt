@@ -1,0 +1,41 @@
+rem ---------------------------------------------------
+rem Creación partición Recovery (UEFI)
+rem https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-biosmbr-based-hard-drive-partitions
+rem https://garytown.com/osd-partition-setup-mike-terrill-edition-the-optimized-way
+rem https://twitter.com/manelrodero/status/1574124155355684869
+rem
+rem v1.0 - Versión inicial 
+rem ---------------------------------------------------
+
+rem ---------------------------------------------------
+rem Seleccionar disco 0 / partición 3 (Windows)
+rem - Reducción de 984MB para "Recovery" (WinRE Tools)
+rem ---------------------------------------------------
+select disk 0
+select partition 3
+shrink desired=984 minimum=984
+
+rem ---------------------------------------------------
+rem Partición "Recovery" (WinRE Tools) de 984MB
+rem https://superuser.com/questions/1108243/setting-winre-windows-recovery-environment-flag-on-partitions
+rem
+rem - id = Recovery Flag
+rem - attributes = More protection; acumulative value
+rem - 0x8000000000000000 - Prevent assigning drive letter
+rem - 0x0000000000000001 - Required partition by system
+rem
+rem - Adaptiva     = 500MB
+rem - UPCnet       = 490MB
+rem - David Segura = 984MB
+rem ---------------------------------------------------
+create partition primary
+format quick fs=ntfs label="Recovery"
+assign letter=R
+set id="de94bba4-06d1-4d40-a16a-bfd50179d6ac"
+gpt attributes=0x8000000000000001
+
+rem ---------------------------------------------------
+rem Exit Diskpart
+rem ---------------------------------------------------
+list partition
+exit
