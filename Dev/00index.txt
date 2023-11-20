@@ -1,0 +1,2 @@
+Disabled Global Settings
+https://osdbuilder.osdeploy.com/docs/advanced/settings/disable-global-settings
