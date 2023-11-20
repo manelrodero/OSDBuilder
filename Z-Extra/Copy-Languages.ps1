@@ -4,7 +4,7 @@
 [CmdletBinding(DefaultParameterSetName = "SO")]
 Param (
     [Parameter(Mandatory)]
-    [ValidateSet('1903', '1909', '2004', '2009')]
+    [ValidateSet('1903', '1909', '2004', '20H2', '21H2', '22H2')]
     [string]$OSVersion
 )
 
@@ -13,29 +13,44 @@ $Error.Clear()
 
 $LPs = @{
     '1903' = @{
-        ISO          = 'E:\EQUIPS\ISOs\Win10\1903\SW_DVD9_NTRL_Win_10_1903_32_64_ARM64_MultiLang_LangPackAll_LIP_X22-01656.iso'
-        Languages    = @('es-es', 'en-us', 'fr-fr')
-        LanguagesLXP = @('ca-es', 'es-es', 'en-us', 'fr-fr')
-        BaseLanguage = 'es-es'
+        ISO          = 'D:\ISOs\Win10\1903\SW_DVD9_NTRL_Win_10_1903_32_64_ARM64_MultiLang_LangPackAll_LIP_X22-01656.iso'
+        Languages    = @('es-es', 'en-us')
+        LanguagesLXP = @('ca-es', 'es-es', 'en-us')
+        BaseLanguage = 'en-us'
     }
     '1909' = @{
-        ISO          = 'E:\EQUIPS\ISOs\Win10\1909\SW_DVD9_NTRL_Win_10_1903_32_64_ARM64_MultiLang_LangPackAll_LIP_X22-01656.iso'
-        Languages    = @('es-es', 'en-us', 'fr-fr')
-        LanguagesLXP = @('ca-es', 'es-es', 'en-us', 'fr-fr')
-        BaseLanguage = 'es-es'
+        ISO          = 'D:\ISOs\Win10\1909\SW_DVD9_NTRL_Win_10_1903_32_64_ARM64_MultiLang_LangPackAll_LIP_X22-01656.iso'
+        Languages    = @('es-es', 'en-us')
+        LanguagesLXP = @('ca-es', 'es-es', 'en-us')
+        BaseLanguage = 'en-us'
     }
     '2004' = @{
-        ISO          = 'E:\EQUIPS\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_32_64_ARM64_MultiLang_LangPackAll_LIP_X22-21307.iso'
-        Languages    = @('es-es', 'en-us', 'fr-fr')
-        LanguagesLXP = @('ca-es', 'es-es', 'en-us', 'fr-fr')
-        BaseLanguage = 'es-es'
+        ISO          = 'D:\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_32_64_ARM64_MultiLang_LangPackAll_LIP_X22-21307.iso'
+        ISOExtraLXP  = 'D:\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_32_64_ARM64_MultLng_LngPkAll_LIP_2022.6C_LXP_X23-17081.ISO'
+        Languages    = @('es-es', 'en-us')
+        LanguagesLXP = @('ca-es', 'es-es', 'en-us')
+        BaseLanguage = 'en-us'
     }
-    '2009' = @{
-        ISO          = 'E:\EQUIPS\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_32_64_ARM64_MultiLang_LangPackAll_LIP_X22-21307.iso'
-        ISOExtraLXP  = 'E:\EQUIPS\ISOs\Win10\20H2\SW_DVD9_NTRL_Win_10_2004_32_64_ARM64_MultiLng_LngPkAll_LIP_9B_LXP_ONLY_X22-38606.iso'
-        Languages    = @('es-es', 'en-us', 'fr-fr', 'da-dk')
-        LanguagesLXP = @('ca-es', 'es-es', 'en-us', 'fr-fr', 'da-dk')
-        BaseLanguage = 'es-es'
+    '20H2' = @{
+        ISO          = 'D:\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_32_64_ARM64_MultiLang_LangPackAll_LIP_X22-21307.iso'
+        ISOExtraLXP  = 'D:\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_32_64_ARM64_MultLng_LngPkAll_LIP_2022.6C_LXP_X23-17081.ISO'
+        Languages    = @('es-es', 'en-us')
+        LanguagesLXP = @('ca-es', 'es-es', 'en-us')
+        BaseLanguage = 'en-us'
+    }
+    '21H2' = @{
+        ISO          = 'D:\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_32_64_ARM64_MultiLang_LangPackAll_LIP_X22-21307.iso'
+        ISOExtraLXP  = 'D:\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_32_64_ARM64_MultLng_LngPkAll_LIP_2022.6C_LXP_X23-17081.ISO'
+        Languages    = @('es-es', 'en-us')
+        LanguagesLXP = @('ca-es', 'es-es', 'en-us')
+        BaseLanguage = 'en-us'
+    }
+    '22H2' = @{
+        ISO          = 'D:\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_32_64_ARM64_MultiLang_LangPackAll_LIP_X22-21307.iso'
+        ISOExtraLXP  = 'D:\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_32_64_ARM64_MultLng_LngPkAll_LIP_2022.6C_LXP_X23-17081.ISO'
+        Languages    = @('es-es', 'en-us')
+        LanguagesLXP = @('ca-es', 'es-es', 'en-us')
+        BaseLanguage = 'en-us'
     }
 }
 
@@ -91,7 +106,8 @@ foreach ($Language in $Languages) {
     Write-Output "Processing $Language LP ..."
     New-OSDBuilderContentPack -ContentType MultiLang -Name "MultiLang $Language"
 
-    $Destination = "$($SetOSDBuilder.PathContentPacks)\MultiLang $Language\OSLanguagePacks\$OSVersion x64"
+    $Destination = "$($SetOSDBuilder.PathContentPacks)\MultiLang $Language\OSLanguagePacks\Windows 10 $OSVersion x64"
+    New-Item -Path "$Destination" -ItemType Directory -Force | Out-Null
     Write-Output "Destination $Destination"
 
     $LanguageFeatures = Get-ChildItem $Source | ? { $_.Name -match 'Language-Pack' } | ? { $_.Name -like "*_$($Language).*" }
@@ -108,7 +124,8 @@ foreach ($LanguageLXP in $LanguagesLXP) {
     Write-Output "Processing $LanguageLXP LXP ..."
     New-OSDBuilderContentPack -ContentType MultiLang -Name "MultiLang $LanguageLXP"
 
-    $Destination = "$($SetOSDBuilder.PathContentPacks)\MultiLang $LanguageLXP\OSLocalExperiencePacks\$OSVersion x64"
+    $Destination = "$($SetOSDBuilder.PathContentPacks)\MultiLang $LanguageLXP\OSLocalExperiencePacks\Windows 10 $OSVersion x64"
+    New-Item -Path "$Destination" -ItemType Directory -Force | Out-Null
     Write-Output "Destination $Destination"
 
     if (Test-Path $SourceLXP\$LanguageLXP) {

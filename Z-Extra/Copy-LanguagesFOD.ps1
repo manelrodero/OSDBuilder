@@ -4,7 +4,7 @@
 [CmdletBinding(DefaultParameterSetName = "SO")]
 Param (
     [Parameter(Mandatory)]
-    [ValidateSet('1903', '1909', '2004', '2009')]
+    [ValidateSet('1903', '1909', '2004', '20H2', '21H2', '22H2')]
     [string]$OSVersion
 )
 
@@ -13,24 +13,34 @@ $Error.Clear()
 
 $LPs = @{
     '1903' = @{
-        ISO          = 'E:\EQUIPS\ISOs\Win10\1903\SW_DVD9_NTRL_Win_10_1903_64Bit_MultiLang_FOD_1_X22-01658.iso'
-        Languages    = @('es-es', 'en-us', 'fr-fr', 'ca-es')
-        BaseLanguage = 'es-es'
+        ISO          = 'D:\ISOs\Win10\1903\SW_DVD9_NTRL_Win_10_1903_64Bit_MultiLang_FOD_1_X22-01658.iso'
+        Languages    = @('es-es', 'en-us', 'ca-es')
+        BaseLanguage = 'en-us'
     }
     '1909' = @{
-        ISO          = 'E:\EQUIPS\ISOs\Win10\1909\SW_DVD9_NTRL_Win_10_1903_64Bit_MultiLang_FOD_1_X22-01658.iso'
-        Languages    = @('es-es', 'en-us', 'fr-fr', 'ca-es')
-        BaseLanguage = 'es-es'	
+        ISO          = 'D:\ISOs\Win10\1909\SW_DVD9_NTRL_Win_10_1903_64Bit_MultiLang_FOD_1_X22-01658.iso'
+        Languages    = @('es-es', 'en-us', 'ca-es')
+        BaseLanguage = 'en-us'	
     }
     '2004' = @{
-        ISO          = 'E:\EQUIPS\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_64Bit_MultiLang_FOD_1_X22-21311.iso'
-        Languages    = @('es-es', 'en-us', 'fr-fr', 'ca-es')
-        BaseLanguage = 'es-es'
+        ISO          = 'D:\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_64Bit_MultiLang_FOD_1_X22-21311.iso'
+        Languages    = @('es-es', 'en-us', 'ca-es')
+        BaseLanguage = 'en-us'
     }
-    '2009' = @{
-        ISO          = 'E:\EQUIPS\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_64Bit_MultiLang_FOD_1_X22-21311.iso'
-        Languages    = @('es-es', 'en-us', 'fr-fr', 'ca-es', 'da-dk')
-        BaseLanguage = 'es-es'
+    '20H2' = @{
+        ISO          = 'D:\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_64Bit_MultiLang_FOD_1_X22-21311.iso'
+        Languages    = @('es-es', 'en-us', 'ca-es')
+        BaseLanguage = 'en-us'
+    }
+    '21H2' = @{
+        ISO          = 'D:\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_64Bit_MultiLang_FOD_1_X22-21311.iso'
+        Languages    = @('es-es', 'en-us', 'ca-es')
+        BaseLanguage = 'en-us'
+    }
+    '22H2' = @{
+        ISO          = 'D:\ISOs\Win10\2004\SW_DVD9_NTRL_Win_10_2004_64Bit_MultiLang_FOD_1_X22-21311.iso'
+        Languages    = @('es-es', 'en-us', 'ca-es')
+        BaseLanguage = 'en-us'
     }
 }
 
@@ -64,7 +74,8 @@ foreach ($Language in $Languages) {
     Write-Output "Processing $Language FOD ..."
     New-OSDBuilderContentPack -ContentType MultiLang -Name "MultiLang $Language"
 
-    $Destination = "$($SetOSDBuilder.PathContentPacks)\MultiLang $Language\OSLanguageFeatures\$OSVersion x64"
+    $Destination = "$($SetOSDBuilder.PathContentPacks)\MultiLang $Language\OSLanguageFeatures\Windows 10 $OSVersion x64"
+    New-Item -Path "$Destination" -ItemType Directory -Force | Out-Null
     Write-Output "Destination $Destination"
     
     $LanguageFeatures = Get-ChildItem $Source | ? { $_.Name -match 'LanguageFeatures' } | ? { $_.Name -like "*-$($Language)-*" }
