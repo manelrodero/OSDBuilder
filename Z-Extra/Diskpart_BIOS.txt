@@ -1,4 +1,4 @@
-rem ---------------------------------------------------
+﻿rem ---------------------------------------------------
 rem Particionado BIOS del entorno inLab FIB
 rem https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-biosmbr-based-hard-drive-partitions
 rem
@@ -14,30 +14,73 @@ clean
 convert mbr
 
 rem ---------------------------------------------------
+rem Partición System de 496MB, NTFS
+rem - Minimum   = 100MB
+rem - 4K Drives = 260MB
+rem - Adaptiva  = 500MB
+rem - UPCnet    = 260MB
+rem - Gary Blok = 496MB
+rem ---------------------------------------------------
+create partition primary size=496
+format quick fs=ntfs label="System"
+assign letter=S
+active
+
+rem ---------------------------------------------------
 rem Partición Windows de 200GB, NTFS, C:
 rem ---------------------------------------------------
 rem create partition primary size=204800
 rem format quick fs=ntfs label="Windows"
 rem assign letter=C
-rem active
 
 rem ---------------------------------------------------
 rem Partición Datos con el resto de espacio, NTFS, D:
+rem - Reducción de 984MB para "Recovery" (WinRE Tools)
+rem - Reducción de xGB+984MB si hay "Recovery Image"
 rem ---------------------------------------------------
 rem create partition primary
+rem shrink desired=984 minimum=984
 rem format quick fs=ntfs label="Data"
 rem assign letter=D
 
 rem ---------------------------------------------------
 rem Partición Windows con el resto de espacio, NTFS, C:
+rem - Reducción de 984MB para "Recovery" (WinRE Tools)
+rem - Reducción de xGB+984MB si hay "Recovery Image"
 rem ---------------------------------------------------
 create partition primary
+shrink desired=984 minimum=984
 format quick fs=ntfs label="Windows"
 assign letter=C
-active
+
+rem ---------------------------------------------------
+rem Partición "Recovery" (WinRE Tools) de 984MB
+rem https://superuser.com/questions/1108243/setting-winre-windows-recovery-environment-flag-on-partitions
+rem
+rem - id = Recovery Flag
+rem
+rem - Adaptiva     = 500MB
+rem - UPCnet       = 490MB
+rem - David Segura = 984MB
+rem ---------------------------------------------------
+create partition primary
+format quick fs=ntfs label="Recovery"
+assign letter=R
+set id=27
+
+rem ---------------------------------------------------
+rem Partición "Recovery Image" de XGB
+rem - En partición de datos, shrink = xGB+984MB
+rem - En la partición "Recovery" especificar size=984MB
+rem ---------------------------------------------------
+rem create partition primary
+rem format quick fs=ntfs label="Recovery Image"
+rem assign letter=I
+rem set id=27
 
 rem ---------------------------------------------------
 rem Exit Diskpart
 rem ---------------------------------------------------
+list partition
 list volume
 exit

@@ -1,4 +1,4 @@
-rem ---------------------------------------------------
+﻿rem ---------------------------------------------------
 rem Particionado UEFI/GPT
 rem https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-uefigpt-based-hard-drive-partitions
 rem
@@ -17,7 +17,7 @@ clean
 convert gpt
 
 rem ---------------------------------------------------
-rem Partición EFI de 260MB, FAT32, etiqueta "EFI"
+rem Partición System (EFI) de 496MB, FAT32
 rem - Minimum   = 100MB
 rem - 4K Drives = 260MB
 rem - Adaptiva  = 500MB
@@ -25,7 +25,7 @@ rem - UPCnet    = 260MB
 rem - Gary Blok = 496MB
 rem ---------------------------------------------------
 create partition efi size=496
-format quick fs=fat32 label="EFI"
+format quick fs=fat32 label="System"
 assign letter=S
 
 rem ---------------------------------------------------
@@ -96,4 +96,5 @@ rem ---------------------------------------------------
 rem Exit Diskpart
 rem ---------------------------------------------------
 list partition
+list volume
 exit
