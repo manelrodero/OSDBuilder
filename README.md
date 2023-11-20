@@ -1155,13 +1155,13 @@ Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\.NetFramework\v4.0.30319' -Name
 
 ### Eliminar Aplicaciones Universales (AppX)
 
-A la hora de decidir qué [aplicaciones universales AppX](https://docs.microsoft.com/en-us/windows/application-management/apps-in-windows-10) se eliminan de las OSBuild pueden ser útiles las tablas de los artículos de [Anton Romanyuk (Vacuum Breather)](https://www.vacuumbreather.com/index.php/blog/item/87-windows-10-1903-built-in-apps-what-to-keep) y de [Mike Galvin](https://gal.vin/2017/04/06/removing-uwp-apps-mdt/).
+A la hora de decidir qué [aplicaciones universales AppX](https://docs.microsoft.com/en-us/windows/application-management/provisioned-apps-windows-client-os) se eliminan de las OSBuild pueden ser útiles las tablas de los artículos de [Anton Romanyuk (Vacuum Breather)](https://www.vacuumbreather.com/index.php/blog/item/95-windows-10-21h2-built-in-apps-what-to-keep) y de [Mike Galvin](https://gal.vin/2017/04/06/removing-uwp-apps-mdt/).
 
-En nuestro entorno se suelen eliminar las aplicaciones indicadas en la siguiente tabla:
+En nuestro entorno se suelen eliminar las aplicaciones de Windows 10 indicadas en la siguiente tabla:
 
 | Paquete | Aplicación | Decisión | Notas |
 | --- | --- | :---: | --- |
-| Microsoft.549981C3F5F10 | Cortana | Conservar | Nueva en 2004|
+| Microsoft.549981C3F5F10 | Cortana | Conservar | Nueva en 2004 |
 | Microsoft.BingWeather | El Tiempo | Eliminar | |
 | Microsoft.DesktopAppInstaller | Instalador de aplicación | Conservar | |
 | Microsoft.GetHelp | Obtener ayuda | Eliminar | |
@@ -1205,6 +1205,54 @@ En nuestro entorno se suelen eliminar las aplicaciones indicadas en la siguiente
 | Microsoft.YourPhone | Tu Teléfono | Eliminar | |
 | Microsoft.ZuneMusic | Groove Música | Eliminar | |
 | Microsoft.ZuneVideo | Películas y TV | Eliminar | |
+
+Las aplicaciones de Windows 11 se indican en la siguiente tabla:
+
+| Paquete | Aplicación | Decisión | Notas |
+| --- | --- | :---: | --- |
+| Microsoft.549981C3F5F10 | Cortana | Conservar | |
+| Microsoft.BingNews | | Eliminar | |
+| Microsoft.BingWeather | El Tiempo | Eliminar | |
+| Microsoft.DesktopAppInstaller | Instalador de aplicación | Conservar | |
+| Microsoft.GamingApp | Obtener ayuda | Eliminar | |
+| Microsoft.GetHelp | Obtener ayuda | Eliminar | |
+| Microsoft.Getstarted | Recomendaciones | Eliminar | |
+| Microsoft.HEIFImageExtension | Extensiones de imagen HEIF | Conservar | |
+| Microsoft.MicrosoftOfficeHub | Office | Eliminar | |
+| Microsoft.MicrosoftSolitaireCollection | Microsoft Solitaire Collection | Eliminar | |
+| Microsoft.MicrosoftStickyNotes | Sticky Notes | Conservar | |
+| Microsoft.Paint | Paint | Conservar | |
+| Microsoft.People | Contactos | Eliminar | |
+| Microsoft.PowerAutomateDesktop | | Conservar | |
+| Microsoft.ScreenSketch | Recorte y anotación | Conservar | |
+| Microsoft.SecHealthUI | | Conservar | |
+| Microsoft.StorePurchaseApp | Store Purchase App | Conservar | |
+| Microsoft.Todos | | Conservar | |
+| Microsoft.UI.Xaml | | Conservar | |
+| Microsoft.VCLibs.140.00 | C++ Runtime for Desktop Bridge | Conservar | |
+| Microsoft.VP9VideoExtensions | VP9 Video Extensions | Conservar | |
+| Microsoft.WebMediaExtensions | Extensiones de multimedia web | Conservar | |
+| Microsoft.WebpImageExtension | Extensiones de imagen Webp | Conservar | |
+| Microsoft.Windows.Photos | Fotos | Conservar | |
+| Microsoft.WindowsAlarms | Alarmas y reloj | Conservar | |
+| Microsoft.WindowsCalculator | Calculadora | Conservar | |
+| Microsoft.WindowsCamera | Cámara | Conservar | |
+| microsoft.windowscommunicationsapps | Correo y Calendario | Eliminar | |
+| Microsoft.WindowsFeedbackHub | Centro de opiniones | Eliminar | Opcional |
+| Microsoft.WindowsMaps | Mapas | Eliminar | |
+| Microsoft.WindowsNotepad | Bloc de notas | Conservar | |
+| Microsoft.WindowsSoundRecorder | Grabadora de voz | Conservar | |
+| Microsoft.WindowsStore | Microsoft Store | Conservar | |
+| Microsoft.WindowsTerminal | Microsoft Store | Conservar | |
+| Microsoft.Xbox.TCUI | Experiencia de Xbox Live en el juego | Eliminar | |
+| Microsoft.XboxGameOverlay | Complemento de la barra de juego Xbox | Eliminar | |
+| Microsoft.XboxGamingOverlay | Barra de juego de Xbox | Eliminar | |
+| Microsoft.XboxIdentityProvider | Proveedor de identidades de Xbox | Eliminar | |
+| Microsoft.XboxSpeechToTextOverlay | n/a | Eliminar | |
+| Microsoft.YourPhone | Tu Teléfono | Eliminar | |
+| Microsoft.ZuneMusic | Groove Música | Eliminar | |
+| Microsoft.ZuneVideo | Películas y TV | Eliminar | |
+| MicrosoftWindows.Client.WebExperience | | Eliminar | |
 
 ## Opciones a explorar
 
