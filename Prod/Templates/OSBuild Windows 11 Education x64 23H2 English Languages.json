@@ -21,8 +21,8 @@
     "CreatedTime":  "\/Date(1696141099013)\/",
     "ModifiedTime":  "\/Date(1698916367929)\/",
     "ContentPacks":  [
-                         "MultiLang ca-es",
-                         "MultiLang es-es"
+                         "MultiLang es-es",
+                         "MultiLang ca-es"
                      ],
     "EnableNetFX3":  "False",
     "WinPEAutoExtraFiles":  "False",
