@@ -4,7 +4,7 @@
 [CmdletBinding(DefaultParameterSetName = "SO")]
 Param (
     [Parameter(Mandatory)]
-    [ValidateSet('21H2','22H2','23H2')]
+    [ValidateSet('21H2','22H2','23H2','24H2')]
     [string]$OSVersion
 )
 
@@ -24,7 +24,12 @@ $LPs = @{
     }
     '23H2' = @{
         ISO          = 'D:\ISOs\Win11\22H2\SW_DVD9_Win_11_22H2_x64_MultiLang_LangPackAll_LIP_LoF_X23-12645.iso'
-        Languages    = @('en-us', 'es-es', 'ca-es')
+        Languages    = @('en-us', 'es-es', 'ca-es', 'gl-es', 'eu-es')
+        BaseLanguage = 'en-us'
+    }
+    '24H2' = @{
+        ISO          = 'D:\ISOs\Win11\24H2\SW_DVD9_Win_11_24H2_x64_MultiLang_LangPackAll_LIP_LoF_X23-69888.iso'
+        Languages    = @('en-us', 'es-es', 'ca-es', 'gl-es', 'eu-es')
         BaseLanguage = 'en-us'
     }
 }
