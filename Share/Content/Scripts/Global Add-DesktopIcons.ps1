@@ -41,7 +41,7 @@ if (Test-Path $RegSystem) {
 
 # {018D5C66-4533-4307-9B53-224DE2ED1FE6} = OneDrive -> Disable
 # {20D04FE0-3AEA-1069-A2D8-08002B30309D} = This PC -> Enable
-# {5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0} = Control Panel -> Enable
+# {5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0} = Control Panel -> Disable
 # {59031A47-3F72-44A7-89C5-5595FE6B30EE} = Profile -> Enable
 # {645FF040-5081-101B-9F08-00AA002F954E} = Recycle Bin -> Enable
 # {F02C1A0D-BE21-4350-88B0-7367FC96EF3C} = Network -> Disable
@@ -49,7 +49,7 @@ if (Test-Path $RegSystem) {
 $RegCommands =
 'add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v {018D5C66-4533-4307-9B53-224DE2ED1FE6} /t REG_DWORD /d 1 /f',
 'add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v {20D04FE0-3AEA-1069-A2D8-08002B30309D} /t REG_DWORD /d 0 /f',
-'add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v {5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0} /t REG_DWORD /d 0 /f',
+'add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v {5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0} /t REG_DWORD /d 1 /f',
 'add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v {59031A47-3F72-44A7-89C5-5595FE6B30EE} /t REG_DWORD /d 0 /f',
 'add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v {645FF040-5081-101B-9F08-00AA002F954E} /t REG_DWORD /d 0 /f',
 'add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v {F02C1A0D-BE21-4350-88B0-7367FC96EF3C} /t REG_DWORD /d 1 /f'
