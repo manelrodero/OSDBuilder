@@ -39,7 +39,7 @@ if (Test-Path $RegSystem) {
 # https://superuser.com/questions/758657/how-to-see-whats-going-on-during-windows-shutdown-logging-off-process
 
 $RegCommands =
-'add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v VerboseStatus /t REG_DWORD /d 1 /f'
+'add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v VerboseStatus /t REG_DWORD /d 1 /f'
 
 foreach ($Command in $RegCommands) {
     if ($Command -like "*HKCU*") {
