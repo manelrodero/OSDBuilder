@@ -37,6 +37,8 @@
     "Scripts":  [
                     "Scripts\\Global Add-DesktopIcons.ps1",
                     "Scripts\\Global Disable-AutoPlay.ps1",
+                    "Scripts\\Global Disable-AutoTray.ps1",
+                    "Scripts\\Global Disable-LMHOSTS.ps1",                    
                     "Scripts\\Global Set-ConsoleOptions.ps1",
                     "Scripts\\Global Set-ControlPanelConfiguration.ps1",
                     "Scripts\\Global Set-FileExplorerOptions.ps1",

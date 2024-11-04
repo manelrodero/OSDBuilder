@@ -29,14 +29,13 @@
     "RemoveWindowsCapability":  null,
     "RemoveWindowsPackage":  null,
     "DisableWindowsOptionalFeature":  [
+                                          "AzureArcSetup",
                                           "Internet-Explorer-Optional-amd64",
                                           "MicrosoftWindowsPowerShellV2",
                                           "Printing-XPSServices-Features"
                                       ],
     "EnableWindowsOptionalFeature":  [
-                                         "Microsoft-Windows-Subsystem-Linux",
-                                         "TelnetClient",
-                                         "VirtualMachinePlatform"
+                                         "TelnetClient"
                                      ],
     "Drivers":  null,
     "ExtraFiles":  null,
