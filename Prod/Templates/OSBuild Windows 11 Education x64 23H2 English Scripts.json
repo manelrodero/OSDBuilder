@@ -39,6 +39,9 @@
     "Scripts":  [
                     "Scripts\\Global Add-DesktopIcons.ps1",
                     "Scripts\\Global Disable-AutoPlay.ps1",
+                    "Scripts\\Global Disable-AutoTray.ps1",
+                    "Scripts\\Global Disable-ExplorerFolderType.ps1",
+                    "Scripts\\Global Disable-LMHOSTS.ps1",
                     "Scripts\\Global Set-ConsoleOptions.ps1",
                     "Scripts\\Global Set-ControlPanelConfiguration.ps1",
                     "Scripts\\Global Set-CrashControl.ps1",
@@ -51,6 +54,7 @@
                     "Scripts\\Windows 10 Disable-AutocorrectMisspelledWords.ps1",
                     "Scripts\\Windows 10 Disable-ConsumerApps.ps1",
                     "Scripts\\Windows 10 Disable-CortanaSearch.ps1",
+                    "Scripts\\Windows 10 Disable-EdgeDesktopSearchBar.ps1",
                     "Scripts\\Windows 10 Disable-EdgeShortcut.ps1",
                     "Scripts\\Windows 10 Disable-NewsFeeds.ps1",
                     "Scripts\\Windows 10 Disable-PrivacySettingsExperience.ps1",
